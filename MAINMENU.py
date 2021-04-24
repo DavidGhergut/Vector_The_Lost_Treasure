@@ -92,7 +92,6 @@ reset = [
 ]
 
 dir_path = Path(__file__).parent.resolve()
-#print(dir_path)
 def MAIN_MENU():
     sense.show_message("Welcome", text_colour = blue, scroll_speed = 0.05)
     sense.show_message("to", text_colour = gold, scroll_speed = 0.05)
@@ -211,7 +210,6 @@ def MAIN_MENU():
                     mixer.music.stop()
                     if is_playable[4] == 1:
                         Level5()
-                        #unlocked()
                     else:
                         locked()
                     pixel1_x = 2
@@ -568,7 +566,6 @@ def Level1():
     ENTERING_MAIN_MENU()
 #Aici apelam toate functiile pe care le-am creat astfel incat jocul sa poata rula (Here we call all the functions we need in order for the game to load)
 
-
 def Level3():
     Controls_Level_3()
     image_level3 = [
@@ -582,6 +579,31 @@ def Level3():
         cyan, dimgrey, cyan, cyan, cyan, dimgrey, dimgrey, cyan
     ]
     sense.set_pixels(image_level3)
+    vector_y = 0
+    vector_x = 4
+    has_flag = False
+    ok_theme_song = False
+    while has_flag == False:
+        """
+        if ok_theme_song == False:
+            ok_theme_song = True
+            initial_date_theme_song = datetime.now()
+            #IMPORTANT DATA TO COMPLETE FOR RUNNING THE THEME SONG
+            final_date_theme_song = initial_date_theme_song + timedelta(seconds = )
+            path1 = dir_path/''
+            mixer.music.load(str(path1))
+            mixer.music.set_volume(1)
+            mixer.music.play()
+        elif datetime.now() >= final_date:
+            ok_theme_song = False
+        """
     
 #MAIN_MENU()
-Level3()
+#Level3()
+
+import threading
+
+th = threading.Thread(target=MAIN_MENU)
+th.start()
+sense.loop()
+th.join()

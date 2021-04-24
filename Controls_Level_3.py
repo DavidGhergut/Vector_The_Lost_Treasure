@@ -24,7 +24,7 @@ water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 3 (FUNCTION FOR CONTROLS AT LEVEL 3)
-def Controls_Level_5():
+def Controls_Level_3():
     print("\n")
     print(color("CONTROLS LEVEL 3:", fore=green))
     print(color("Pink -> Vector", fore=pink))
