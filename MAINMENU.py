@@ -31,7 +31,7 @@ from Level5 import Level5
 
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
-is_playable = [1, 0, 0, 0, 1]
+is_playable = [1, 0, 1, 0, 1]
 
 #CULORI pentru SenseHat (COLOURS for the SenseHat):
 black = [0, 0, 0]
@@ -185,8 +185,7 @@ def MAIN_MENU():
                 elif pixel1_y == 0 and pixel1_x == 2 and pixel2_y == 1 and pixel2_x == 2:
                     mixer.music.stop()
                     if is_playable[2] == 1:
-                        #Level3()
-                        unlocked()
+                        Level3()
                     else:
                         locked()
                     pixel1_x = 2
@@ -579,28 +578,306 @@ def Level3():
         cyan, dimgrey, cyan, cyan, cyan, dimgrey, dimgrey, cyan
     ]
     sense.set_pixels(image_level3)
+    original_pixels = sense.get_pixels()
     vector_y = 0
     vector_x = 4
     has_flag = False
+    out_of_board = False
     ok_theme_song = False
-    while has_flag == False:
-        """
+    moves_made = 0
+    while has_flag == False and moves_made <= 15:
         if ok_theme_song == False:
             ok_theme_song = True
             initial_date_theme_song = datetime.now()
-            #IMPORTANT DATA TO COMPLETE FOR RUNNING THE THEME SONG
-            final_date_theme_song = initial_date_theme_song + timedelta(seconds = )
-            path1 = dir_path/''
+            final_date_theme_song = initial_date_theme_song + timedelta(seconds = 32)
+            path1 = dir_path/'melodie_level3.mp3'
             mixer.music.load(str(path1))
             mixer.music.set_volume(1)
             mixer.music.play()
-        elif datetime.now() >= final_date:
+        elif datetime.now() >= final_date_theme_song:
             ok_theme_song = False
-        """
-    
-#MAIN_MENU()
-#Level3()
+        pixels = sense.get_pixels()
+        event = sense.stick.wait_for_event(emptybuffer=True)
+        if event.action == "pressed" and event.direction != "middle":
+            moves_made += 1
+            if event.direction == "up":
+                if vector_x == 0:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    out_of_board = True
+                elif pixels[8 * (vector_x - 1) + vector_y] == cyan:
+                    while pixels[8 * (vector_x - 1) + vector_y] == cyan:
+                        if original_pixels[8 * vector_x + vector_y] == dimgrey or (vector_y == 0 and vector_x == 4):
+                            sense.set_pixel(vector_y, vector_x, dimgrey)
+                        else:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        sleep(0.5)
+                        if vector_x - 1 < 0:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            out_of_board = True
+                            break
+                    if out_of_board == False:
+                        if pixels[8 * (vector_x - 1) + vector_y] == purple:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            out_of_board = True
+                        elif pixels[8 * (vector_x - 1) + vector_y] == dimgrey:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                        elif pixels[8 * (vector_x - 1) + vector_y] == red:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            mixer.music.stop()
+                            path2 = dir_path/'c.mp3'
+                            mixer.music.load(str(path2))
+                            mixer.music.set_volume(1)
+                            mixer.music.play()
+                            animation_win_level_1()
+                            has_flag = True
+                elif pixels[8 * (vector_x - 1) + vector_y] == purple:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    out_of_board = True
+                elif pixels[8 * (vector_x - 1) + vector_y] == dimgrey:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                elif pixels[8 * (vector_x - 1) + vector_y] == red:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    mixer.music.stop()
+                    path2 = dir_path/'c.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_win_level_1()
+                    has_flag = True
+                if out_of_board == True:
+                    mixer.music.stop()
+                    path2 = dir_path/'d.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_lose_level_1()
+                    break
+            elif event.direction == "right":
+                if vector_y == 7:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    out_of_board = True
+                elif pixels[8 * vector_x + vector_y + 1] == cyan:
+                    while pixels[8 * vector_x + vector_y + 1] == cyan:
+                        if original_pixels[8 * vector_x + vector_y] == dimgrey or (vector_y == 0 and vector_x == 4):
+                            sense.set_pixel(vector_y, vector_x, dimgrey)
+                        else:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        sleep(0.5)
+                        if vector_y + 1 > 7:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            out_of_board = True
+                            break
+                    if out_of_board == False:
+                        if pixels[8 * vector_x + vector_y + 1] == purple:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            out_of_board = True
+                        elif pixels[8 * vector_x + vector_y + 1] == dimgrey:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                        elif pixels[8 * vector_x + vector_y + 1] == red:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            mixer.music.stop()
+                            path2 = dir_path/'c.mp3'
+                            mixer.music.load(str(path2))
+                            mixer.music.set_volume(1)
+                            mixer.music.play()
+                            animation_win_level_1()
+                            has_flag = True
+                elif pixels[8 * vector_x + vector_y + 1] == purple:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    out_of_board = True
+                elif pixels[8 * vector_x + vector_y + 1] == dimgrey:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                elif pixels[8 * vector_x + vector_y + 1] == red:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    mixer.music.stop()
+                    path2 = dir_path/'c.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_win_level_1()
+                    has_flag = True
+                if out_of_board == True:
+                    mixer.music.stop()
+                    path2 = dir_path/'d.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_lose_level_1()
+                    break
+            elif event.direction == "left":
+                if vector_y == 0:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    out_of_board = True
+                elif pixels[8 * vector_x + vector_y - 1] == cyan:
+                    while pixels[8 * vector_x + vector_y - 1] == cyan:
+                        if original_pixels[8 * vector_x + vector_y] == dimgrey or (vector_y == 0 and vector_x == 4):
+                            sense.set_pixel(vector_y, vector_x, dimgrey)
+                        else:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        sleep(0.5)
+                        if vector_y - 1 < 0:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            out_of_board = True
+                            break
+                    if out_of_board == False:
+                        if pixels[8 * vector_x + vector_y - 1] == purple:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            out_of_board = True
+                        elif pixels[8 * vector_x + vector_y - 1] == dimgrey:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                        elif pixels[8 * vector_x + vector_y - 1] == red:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_y -= 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            mixer.music.stop()
+                            path2 = dir_path/'c.mp3'
+                            mixer.music.load(str(path2))
+                            mixer.music.set_volume(1)
+                            mixer.music.play()
+                            animation_win_level_1()
+                            has_flag = True
+                elif pixels[8 * vector_x + vector_y - 1] == purple:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    out_of_board = True
+                elif pixels[8 * vector_x + vector_y - 1] == dimgrey:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                elif pixels[8 * vector_x + vector_y - 1] == red:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_y -= 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    mixer.music.stop()
+                    path2 = dir_path/'c.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_win_level_1()
+                    has_flag = True
+                if out_of_board == True:
+                    mixer.music.stop()
+                    path2 = dir_path/'d.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_lose_level_1()
+                    break
+            elif event.direction == "down":
+                if vector_x == 7:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    out_of_board = True
+                elif pixels[8 * (vector_x + 1) + vector_y] == cyan:
+                    while pixels[8 * (vector_x + 1) + vector_y] == cyan:
+                        if original_pixels[8 * vector_x + vector_y] == dimgrey or (vector_y == 0 and vector_x == 4):
+                            sense.set_pixel(vector_y, vector_x, dimgrey)
+                        else:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        sleep(0.5)
+                        if vector_x + 1 > 7:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            out_of_board = True
+                            break
+                    if out_of_board == False:
+                        if pixels[8 * (vector_x + 1) + vector_y] == purple:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            out_of_board = True
+                        elif pixels[8 * (vector_x + 1) + vector_y] == dimgrey:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                        elif pixels[8 * (vector_x + 1) + vector_y] == red:
+                            sense.set_pixel(vector_y, vector_x, cyan)
+                            vector_x += 1
+                            sense.set_pixel(vector_y, vector_x, pink)
+                            mixer.music.stop()
+                            path2 = dir_path/'c.mp3'
+                            mixer.music.load(str(path2))
+                            mixer.music.set_volume(1)
+                            mixer.music.play()
+                            animation_win_level_1()
+                            has_flag = True
+                elif pixels[8 * (vector_x + 1) + vector_y] == purple:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    out_of_board = True
+                elif pixels[8 * (vector_x + 1) + vector_y] == dimgrey:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                elif pixels[8 * (vector_x + 1) + vector_y] == red:
+                    sense.set_pixel(vector_y, vector_x, dimgrey)
+                    vector_x += 1
+                    sense.set_pixel(vector_y, vector_x, pink)
+                    mixer.music.stop()
+                    path2 = dir_path/'c.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_win_level_1()
+                    has_flag = True
+                if out_of_board == True:
+                    mixer.music.stop()
+                    path2 = dir_path/'d.mp3'
+                    mixer.music.load(str(path2))
+                    mixer.music.set_volume(1)
+                    mixer.music.play()
+                    animation_lose_level_1()
+                    break
+    if moves_made > 15:
+        mixer.music.stop()
+        path2 = dir_path/'d.mp3'
+        mixer.music.load(str(path2))
+        mixer.music.set_volume(1)
+        mixer.music.play()
+        animation_lose_level_1()
+    if has_flag == True:
+        is_playable[2] = 1
+    afisare_imagine_de_sfarsit_de_nivel_1()
+    afisare_imagine_de_sfarsit_de_nivel_2()
+    ENTERING_MAIN_MENU()
 
+#Pentru a te putea folosi de SenseHat-ul fizic, comenteaza toate liniile de mai jos (If you want to use the physical SenseHat, comment all the lines below)
 import threading
 
 th = threading.Thread(target=MAIN_MENU)
