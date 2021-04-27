@@ -26,10 +26,10 @@ dimgrey = [104, 104, 104]
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 4 (FUNCTION FOR CONTROLS AT LEVEL 4)
 def Controls_Level_4():
     print("\n")
-    print(color("CONTROLS LEVEL 4:", fore=purple))
+    print(color("CONTROLS LEVEL 4:", fore=green))
     print(color("Pink -> Vector", fore=pink))
     print(color("Dimgrey -> Pavement", fore=dimgrey))
     print(color("Red -> Landmines", fore=red))
-    print(color("Brown -> Doors to the next room", fore=brown))
+    print(color("Purple -> Doors to the next room", fore=purple))
     print(color("Gold -> Key", fore=gold))
     print("\n")

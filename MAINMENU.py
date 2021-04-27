@@ -317,6 +317,7 @@ def Level1():
     has_wooden_bucket = False
     has_flag = False
     ok4 = False
+    
     while has_flag == False:
         if ok4 == False:
             ok4 = True
@@ -330,6 +331,8 @@ def Level1():
             ok4 = False
         pixels1 = sense.get_pixels()
         event4 = sense.stick.wait_for_event(emptybuffer = True)
+        print(vector_x)
+        print(vector_y)
         if event4.action == "pressed" and event4.direction == "up" and vector_x > 0 and pixels1[8 * (vector_x - 1) + vector_y] != dimgrey:
             if pixels1[8 * (vector_x - 1) + vector_y] == gold and vector_x - 2 >= 0 and pixels1[8 * (vector_x - 2) + vector_y] != dimgrey:
                 if pixels1[8 * (vector_x - 2) + vector_y] == water:
@@ -501,7 +504,7 @@ def Level1():
                 sense.set_pixel(vector_y, vector_x, black)
                 vector_y = vector_y - 1
                 sense.set_pixel(vector_y, vector_x, pink)
-        elif event4.action == "pressed" and event4.direction == "right" and vector_y + 1 < 7 and pixels1[8 * vector_x + vector_y + 1] != dimgrey:
+        elif event4.action == "pressed" and event4.direction == "right" and vector_y < 7 and pixels1[8 * vector_x + vector_y + 1] != dimgrey:
             if pixels1[8 * vector_x + vector_y + 1] == gold and vector_y + 2 <= 7 and pixels1[8 * vector_x + vector_y + 2] != dimgrey:
                 if pixels1[8 * vector_x + vector_y + 2] == water:
                     sense.set_pixel(vector_y + 1, vector_x, black)
@@ -513,7 +516,7 @@ def Level1():
                 else:
                     sense.set_pixel(vector_y + 1, vector_x, black)
                     sense.set_pixel(vector_y + 2, vector_x, gold)
-            elif pixels1[8 * vector_x + vector_y + 1] == gold and (vector_x + 2 > 7 or pixels1[8 * vector_x + vector_y + 2] == dimgrey):
+            elif pixels1[8 * vector_x + vector_y + 1] == gold and (vector_y + 2 > 7 or pixels1[8 * vector_x + vector_y + 2] == dimgrey):
                 continue
             elif pixels1[8 * vector_x + vector_y + 1] == water:
                 if has_wooden_bucket_water == 0 and has_wooden_bucket == True:
@@ -880,150 +883,274 @@ def Level3():
 
 def Level4():
     Controls_Level_4()
-    intro_level4 = [
+    intro_level4_1 = [
         dimgrey, dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, red,
         dimgrey, red, dimgrey, dimgrey, red, dimgrey, red, dimgrey,
-        dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey, gold,
+        dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey, purple,
         dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey, red,
         pink, dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, red,
         red, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red,
         dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, red,
         dimgrey, red, dimgrey, dimgrey, red, dimgrey, red, dimgrey
     ]
-    sense.set_pixels(intro_level4)
+    intro_level4_2 = [
+        dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, red,
+        pink, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red,
+        dimgrey, red, dimgrey, red, dimgrey, dimgrey, dimgrey, red,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey, red,
+        dimgrey, red, dimgrey, red, red, dimgrey, dimgrey, red,
+        red, dimgrey, red, red, dimgrey, red, dimgrey, purple,
+        dimgrey, red, dimgrey, red, dimgrey, dimgrey, red, red
+    ]
+    intro_level4_3 = [
+        red, dimgrey, dimgrey, red, dimgrey, red, dimgrey, dimgrey,
+        dimgrey, red, red, dimgrey, red, dimgrey, red, red,
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey,
+        dimgrey, red, dimgrey, red, dimgrey, red, dimgrey, red,
+        dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey, purple,
+        red, red, dimgrey, red, dimgrey, dimgrey, dimgrey, red,
+        pink, dimgrey, dimgrey, red, dimgrey, red, red, dimgrey,
+        dimgrey, red, dimgrey, dimgrey, red, dimgrey, dimgrey, red
+    ]
+    intro_level4_4 = [
+        dimgrey, red, red, red, dimgrey, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, dimgrey,
+        red, dimgrey, red, dimgrey, red, dimgrey, red, red,
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey,
+        pink, dimgrey, red, red, dimgrey, dimgrey, dimgrey, red, 
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, red, dimgrey, red, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, purple,
+    ]
+    intro_level4_5 = [
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, dimgrey,
+        dimgrey, red, dimgrey, red, dimgrey, red, dimgrey, red,
+        dimgrey, red, dimgrey, red, dimgrey, red, red, dimgrey,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, purple,
+        dimgrey, dimgrey, red, dimgrey, red, red, dimgrey, red,
+        dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red,
+        red, red, dimgrey, dimgrey, red, red, red, dimgrey,
+        pink, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red
+    ]
+    intro_level4_6 = [
+        dimgrey, dimgrey, red, dimgrey, dimgrey, red, dimgrey, red,
+        dimgrey, red, red, red, dimgrey, dimgrey, dimgrey, red,
+        dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey,
+        pink, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey,
+        dimgrey, red, dimgrey, dimgrey, red, dimgrey, red, purple,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red,
+        red, dimgrey, dimgrey, red, red, dimgrey, red, dimgrey,
+        red, dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey
+    ]
+    intro_level4_7 = [
+        red, dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, red,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey, dimgrey,
+        red, dimgrey, dimgrey, red, dimgrey, dimgrey, red, red,
+        red, red, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey,
+        pink, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red,
+        red, dimgrey, red, dimgrey, dimgrey, dimgrey, red, purple,
+        dimgrey, red, dimgrey, dimgrey, red, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey
+    ]
+    intro_level4_8 = [
+        dimgrey, dimgrey, red, dimgrey, dimgrey, red, red, purple,
+        red, dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey,
+        dimgrey, red, red, dimgrey, red, dimgrey, dimgrey, dimgrey,
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, red,
+        dimgrey, red, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey,
+        pink, dimgrey, dimgrey, red, dimgrey, red, dimgrey, red,
+        red, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey,
+        red, red, dimgrey, dimgrey, red, red, red, dimgrey
+    ]
+    intro_level4_9 = [
+        pink, dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey,
+        dimgrey, dimgrey, dimgrey, red, dimgrey, red, dimgrey, dimgrey,
+        dimgrey, dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey,
+        dimgrey, dimgrey, red, red, dimgrey, dimgrey, dimgrey, red,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey,
+        red, dimgrey, dimgrey, red, red, dimgrey, red, purple,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey
+    ]
+    intro_level4_10 = [
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey,
+        red, dimgrey, dimgrey, red, red, red, dimgrey, dimgrey,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, red, dimgrey, red,
+        dimgrey, dimgrey, red, red, dimgrey, red, dimgrey, gold, 
+        dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, red, dimgrey, dimgrey,
+        dimgrey, red, dimgrey, red, dimgrey, red, red, dimgrey,
+        pink, red, dimgrey, dimgrey, dimgrey, dimgrey, red, red,
+        dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey
+    ]
+    images = [intro_level4_1, intro_level4_2, intro_level4_3, intro_level4_4, intro_level4_5, intro_level4_6, intro_level4_7, intro_level4_8, intro_level4_9, intro_level4_10]
     print(color("\nImpressive! You made it to Medios's hallway! It looks like Medios is quite a smart villain and in every room that we need to go through to get to his room he has put several landmines. Watch out for them and try to find a safe way to the doors and get the golden key, in order to fight all mighty Medios.\n", fore=green))
-    pixels = sense.get_pixels()
     ok_music = False
     vector_x = 4
-    vector_y= 0
     has_golden_key = False
-    while has_golden_key == False:
-        if ok_music == False:
-            ok_music = True
-            initial_music_date = datetime.now()
-            final_music_date = initial_music_date + timedelta(seconds=21)
-            path1 = dir_path/'melodie_level4.mp3'
-            mixer.music.load(str(path1))
-            mixer.music.set_volume(1)
-            mixer.music.play()
-        elif datetime.now() >= final_music_date:
-            ok_music = False
-        event = sense.stick.wait_for_event(emptybuffer=True)
-        if event.action == "pressed":
-            if event.direction == "up" and vector_x > 0:
-                if pixels[8 * (vector_x - 1) + vector_y] == red:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'d.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    animation_lose_level_1()
-                    break
-                elif pixels[8 * (vector_x - 1) + vector_y] == gold:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'c.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    has_golden_key = True
-                    animation_win_level_1()
-                else:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-            elif event.direction == "right" and vector_y < 7:
-                if pixels[8 * vector_x + vector_y + 1] == red:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'d.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    animation_lose_level_1()
-                    break
-                elif pixels[8 * vector_x + vector_y + 1] == gold:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'c.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    has_golden_key = True
-                    animation_win_level_1()
-                else:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-            elif event.direction == "down" and vector_x < 7:
-                if pixels[8 * (vector_x + 1) + vector_y] == red:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'d.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    animation_lose_level_1()
-                    break
-                elif pixels[8 * (vector_x + 1) + vector_y] == gold:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'c.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    has_golden_key = True
-                    animation_win_level_1()
-                else:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_x += 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-            elif event.direction == "left" and vector_y > 0:
-                if pixels[8 * vector_x + vector_y - 1] == red:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'d.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    animation_lose_level_1()
-                    break
-                elif pixels[8 * vector_x + vector_y - 1] == gold:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
-                    mixer.music.stop()
-                    path2 = dir_path/'c.mp3'
-                    mixer.music.load(str(path2))
-                    mixer.music.set_volume(1)
-                    mixer.music.play()
-                    has_golden_key = True
-                    animation_win_level_1()
-                else:
-                    sense.set_pixel(vector_y, vector_x, dimgrey)
-                    vector_y -= 1
-                    sense.set_pixel(vector_y, vector_x, pink)
+    for image in images:
+        sense.set_pixels(image)
+        pixels = sense.get_pixels()
+        gone_through_door = False
+        vector_y = 0
+        while (image == intro_level4_10 and has_golden_key == False) or (image != intro_level4_10 and gone_through_door == False): 
+            if ok_music == False:
+                ok_music = True
+                initial_music_date = datetime.now()
+                final_music_date = initial_music_date + timedelta(seconds=21)
+                path1 = dir_path/'melodie_level4.mp3'
+                mixer.music.load(str(path1))
+                mixer.music.set_volume(1)
+                mixer.music.play()
+            elif datetime.now() >= final_music_date:
+                ok_music = False
+            event = sense.stick.wait_for_event(emptybuffer=True)
+            if event.action == "pressed":
+                if event.direction == "up" and vector_x > 0:
+                    if pixels[8 * (vector_x - 1) + vector_y] == red:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'d.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        animation_lose_level_1()
+                        afisare_imagine_de_sfarsit_de_nivel_1()
+                        afisare_imagine_de_sfarsit_de_nivel_2()
+                        ENTERING_MAIN_MENU()
+                        return
+                    elif pixels[8 * (vector_x - 1) + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'c.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        has_golden_key = True
+                        animation_win_level_1()
+                    elif pixels[8 * (vector_x - 1) + vector_y] == purple:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        gone_through_door = True
+                    else:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                elif event.direction == "right" and vector_y < 7:
+                    if pixels[8 * vector_x + vector_y + 1] == red:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'d.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        animation_lose_level_1()
+                        afisare_imagine_de_sfarsit_de_nivel_1()
+                        afisare_imagine_de_sfarsit_de_nivel_2()
+                        ENTERING_MAIN_MENU()
+                        return
+                    elif pixels[8 * vector_x + vector_y + 1] == gold:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'c.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        has_golden_key = True
+                        animation_win_level_1()
+                    elif pixels[8 * vector_x + vector_y + 1] == purple:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        gone_through_door = True
+                    else:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                elif event.direction == "down" and vector_x < 7:
+                    if pixels[8 * (vector_x + 1) + vector_y] == red:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'d.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        animation_lose_level_1()
+                        afisare_imagine_de_sfarsit_de_nivel_1()
+                        afisare_imagine_de_sfarsit_de_nivel_2()
+                        ENTERING_MAIN_MENU()
+                        return
+                    elif pixels[8 * (vector_x + 1) + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'c.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        has_golden_key = True
+                        animation_win_level_1()
+                    elif pixels[8 * (vector_x + 1) + vector_y] == purple:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        gone_through_door = True
+                    else:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                elif event.direction == "left" and vector_y > 0:
+                    if pixels[8 * vector_x + vector_y - 1] == red:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'d.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        animation_lose_level_1()
+                        afisare_imagine_de_sfarsit_de_nivel_1()
+                        afisare_imagine_de_sfarsit_de_nivel_2()
+                        ENTERING_MAIN_MENU()
+                        return
+                    elif pixels[8 * vector_x + vector_y - 1] == gold:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        mixer.music.stop()
+                        path2 = dir_path/'c.mp3'
+                        mixer.music.load(str(path2))
+                        mixer.music.set_volume(1)
+                        mixer.music.play()
+                        has_golden_key = True
+                        animation_win_level_1()
+                    elif pixels[8 * vector_x + vector_y - 1] == gold:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                        gone_through_door = True
+                    else:
+                        sense.set_pixel(vector_y, vector_x, dimgrey)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
     if has_golden_key == True:
         is_playable[3] = 1
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
-
 #Pentru a te putea folosi de SenseHat-ul fizic, comenteaza toate liniile de mai jos (If you want to use the physical SenseHat, comment all the lines below)
 import threading
 

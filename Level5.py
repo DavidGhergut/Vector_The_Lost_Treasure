@@ -99,6 +99,7 @@ def Level5():
                         ok_easter = False
                         break
                 if ok_easter == True:
+                    print(color("Awesome! You have found the easter egg! You win automatically! Less goo!", fore=gold))
                     mixer.music.stop()
                     path2 = dir_path/'letsgoo.mp3'
                     mixer.music.load(str(path2))
@@ -237,6 +238,7 @@ def Level5():
                 boss_bullets_fired["fired " + str(boss_bullet_x) + " and " + str(boss_bullet_y)] = new_boss_bullet
                 initial_date_boss_bullet = datetime.now()
     if vector_life_hearts != 0 and ok_easter == False:
+        
         mixer.music.stop()
         path2 = dir_path/'victory_boss.mp3'
         mixer.music.load(str(path2))
