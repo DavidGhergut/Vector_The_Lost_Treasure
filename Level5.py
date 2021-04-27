@@ -41,7 +41,7 @@ dimgrey = [104, 104, 104]
 
 def Level5():
     Controls_Level_5()
-    intro = [
+    intro_level5 = [
         red, red, red, red, red, red, red, red,
         black, black, black, black, black, black, black, black,
         black, black, black, black, black, black, black, toxicgreen,
@@ -51,7 +51,7 @@ def Level5():
         black, black, black, black, black, black, black, black,
         pink, black, black, black, black, black, black, black,
     ]
-    sense.set_pixels(intro)
+    sense.set_pixels(intro_level5)
     dir_path = Path(__file__).parent.resolve()
     boss_life_hearts = 0
     vector_life_hearts = 3
@@ -88,7 +88,6 @@ def Level5():
             mixer.music.set_volume(1)
             mixer.music.play()
             animation_lose_level_1()
-            #sense.show_message("GAME OVER!", text_colour=red, scroll_speed = 0.05)
             break
         event = sense.stick.wait_for_event(emptybuffer = True)
         if event.action == "pressed":
@@ -244,7 +243,6 @@ def Level5():
         mixer.music.set_volume(1)
         mixer.music.play()
         animation_win_Level5()
-        #sense.show_message("Congratulations, you win!", text_colour = green, scroll_speed = 0.05)
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()

@@ -32,5 +32,5 @@ def Controls_Level_1():
     print(color("Gold -> Sand", fore=gold))
     print(color("Blue -> Water", fore=water))
     print(color("Red -> Fire", fore=red))
-    print(color("Purple -> Flag", fore=purple))
+    print(color("Purple -> Key to the castle's garden", fore=purple))
     print("\n")

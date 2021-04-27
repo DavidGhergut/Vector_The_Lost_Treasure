@@ -23,13 +23,13 @@ brown2 = [210, 105, 30]
 water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 
-#FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 3 (FUNCTION FOR CONTROLS AT LEVEL 3)
-def Controls_Level_3():
+#FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 4 (FUNCTION FOR CONTROLS AT LEVEL 4)
+def Controls_Level_4():
     print("\n")
-    print(color("CONTROLS LEVEL 3:", fore=green))
+    print(color("CONTROLS LEVEL 4:", fore=purple))
     print(color("Pink -> Vector", fore=pink))
-    print(color("Red -> Key to the hallway", fore=red))
-    print(color("Cyan -> Ice", fore=cyan))
-    print(color("Grey -> Pavement", fore=dimgrey))
-    print(color("Purple -> Lasers", fore=purple))
+    print(color("Dimgrey -> Pavement", fore=dimgrey))
+    print(color("Red -> Landmines", fore=red))
+    print(color("Brown -> Doors to the next room", fore=brown))
+    print(color("Gold -> Key", fore=gold))
     print("\n")
