@@ -23,6 +23,8 @@ brown2 = [210, 105, 30]
 water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 1 (FUNCTION FOR CONTROLS AT LEVEL 1)
+#ENGLEZA(ENGLISH)
+""""
 def Controls_Level_1():
     print("\n")
     print(color("CONTROLS LEVEL 1:", fore=green))
@@ -33,4 +35,17 @@ def Controls_Level_1():
     print(color("Blue -> Water", fore=water))
     print(color("Red -> Fire", fore=red))
     print(color("Purple -> Key to the castle's garden", fore=purple))
+    print("\n")
+"""
+#ROMANA (ROMANIAN)
+def Controls_Level_1():
+    print("\n")
+    print(color("CONTROALE NIVEL 1:", fore=green))
+    print(color("Roz -> Vector", fore=pink))
+    print(color("Gri -> Perete", fore=dimgrey))
+    print(color("Maro -> Galeata maro", fore=brown))
+    print(color("Galben -> Nisip", fore=gold))
+    print(color("Albastru -> Apa", fore=water))
+    print(color("Rosu -> Foc", fore=red))
+    print(color("Mov -> Cheie catre gradina castelului", fore=purple))
     print("\n")

@@ -14,13 +14,13 @@ from colr import color
 from animation_lose_level_1 import animation_lose_level_1
 from animation_win_level_1 import animation_win_level_1
 from locked import locked
-from unlocked import unlocked
 from ENTERING_MAIN_MENU import ENTERING_MAIN_MENU
 from datetime import datetime, timedelta
 from afisare_imagine_de_sfarsit_de_nivel_1 import afisare_imagine_de_sfarsit_de_nivel_1
 from afisare_imagine_de_sfarsit_de_nivel_2 import afisare_imagine_de_sfarsit_de_nivel_2
 from Controls import Controls
 from Controls_Level_1 import Controls_Level_1
+from Controls_Level_2 import Controls_Level_2
 from Controls_Level_3 import Controls_Level_3
 from Controls_Level_4 import Controls_Level_4
 from storyline_level_1 import storyline_level_1
@@ -32,7 +32,7 @@ from Level5 import Level5
 
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
-is_playable = [1, 0, 1, 1, 1]
+is_playable = [0, 0, 0, 0, 0]
 
 #CULORI pentru SenseHat (COLOURS for the SenseHat):
 black = [0, 0, 0]
@@ -174,8 +174,7 @@ def MAIN_MENU():
                 elif pixel1_y == 6 and pixel1_x == 6 and pixel2_y == 7 and pixel2_x == 6:
                     mixer.music.stop()
                     if is_playable[1] == 1:
-                        #Level2()
-                        unlocked()
+                        Level2()
                     else:
                         locked()
                     pixel1_x = 2
@@ -296,7 +295,6 @@ def Storyline():
     ENTERING_MAIN_MENU()
 
 
-#FUNCTIE PENTRU NIVELUL 1 (LEVEL 1 FUNCTION)
 def Level1():
     Controls_Level_1()
     image_level1 = [
@@ -317,7 +315,10 @@ def Level1():
     has_wooden_bucket = False
     has_flag = False
     ok4 = False
-    
+    #ENGLEZA (ENGLISH)
+    #print(color("\nWelcome to Smelda, the last village who was destroyed by the furious monster Medios. Apparently, when he flew away from this place, a key to his castle's garden fell on the ground. Your duty is to find it! Use the blocks of sands to dry the water and the wooden bucket to put out the fire so you can get the key. Good luck!\n", fore=green))
+    #ROMANA (ROMANIAN)
+    print(color("\nBun venit in Smelda, ultimul sat care a fost distrus de catre monstrul furios Medios. Aparent, atunci cand a zburat de pe aceste meleaguri, o cheie catre gradina castelului sau a cazut pe jos. Misiunea ta este sa o gasesti! Foloseste gramezile de nisip pentru a seca apa si galeata de lemn pentru a stinge focul, astfel incat sa obtii cheia. Mult noroc!\n", fore=green))
     while has_flag == False:
         if ok4 == False:
             ok4 = True
@@ -331,8 +332,6 @@ def Level1():
             ok4 = False
         pixels1 = sense.get_pixels()
         event4 = sense.stick.wait_for_event(emptybuffer = True)
-        print(vector_x)
-        print(vector_y)
         if event4.action == "pressed" and event4.direction == "up" and vector_x > 0 and pixels1[8 * (vector_x - 1) + vector_y] != dimgrey:
             if pixels1[8 * (vector_x - 1) + vector_y] == gold and vector_x - 2 >= 0 and pixels1[8 * (vector_x - 2) + vector_y] != dimgrey:
                 if pixels1[8 * (vector_x - 2) + vector_y] == water:
@@ -566,7 +565,192 @@ def Level1():
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
-#Aici apelam toate functiile pe care le-am creat astfel incat jocul sa poata rula (Here we call all the functions we need in order for the game to load)
+
+
+def Level2():
+    Controls_Level_2()
+    image_level2 = [
+        green, white, green, dimgrey, dimgrey, dimgrey, green, green,
+        dimgrey, green, green, dimgrey, green, green, green, green,
+        green, green, green, green, green, dimgrey, green, green,
+        green, white, dimgrey, dimgrey, green, green, green, dimgrey,
+        green, green, green, green, green, dimgrey, white, green,
+        gold, green, dimgrey, green, green, green, white, dimgrey, 
+        dimgrey, white, white, white, green, dimgrey, green, green,
+        pink, white, dimgrey, dimgrey, green, green, green, green 
+    ]
+    sense.set_pixels(image_level2)
+    original_pixels = sense.get_pixels()
+    vector_x = 7
+    vector_y = 0
+    flowers_red = 0
+    flower_blue = False
+    touched_pressure_plate = False
+    ok_music = False
+    color_matrix = [
+        [1, 10, 1, 10, 10, 10, 1, 1],
+        [10, 1, 1, 10, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 10, 1, 1],
+        [1, 10, 10, 10, 1, 1, 1, 10],
+        [1, 1, 1, 1, 1, 10, 10, 1],
+        [10, 1, 10, 1, 1, 1, 10, 10],
+        [10, 10, 10, 10, 1, 10, 1, 1],
+        [10, 10, 10, 10, 1, 1, 1, 1]
+    ]
+    #ENGLEZA (ENGLISH)
+    #print(color("\nThis is Medios's garden. As you can see, this garden is filled with green flowers, but if you touch them, they change color. One touch turns the flower red and a second touch turns it blue. You need to turn all flowers red and arrive on the pressure plate in order to gain access to Medios's castle. If you turn a flower blue, go to the pressure plate in order to lose. Make careful steps!\n", fore=green))
+    #ROMANA (ROMANIAN)
+    print(color("\nAceasta este gradina lui Medios. Dupa cum poti vedea, aceasta gradina este plinca de flori verzi, dar daca le atingi, li se schimba culoarea. O atingere schimba culoarea florii in rosu, iar o a doua atingere o schimba in albastru. Tot ce trebuie sa faci este sa schimbi culoarea tuturor florilor in rosu si sa ajungi pe zona galbena pentru a obtine acces in casa lui Medios. Daca transformi o floare in albastru, pentru a putea pierde du-te pe zona galbena. Ai grija!\n", fore=green))
+    while touched_pressure_plate == False:
+        if ok_music == False:
+            ok_music = True
+            initial_music_date = datetime.now()
+            final_music_date = initial_music_date + timedelta(seconds=21)
+            path1 = dir_path/'melodie_level2.mp3'
+            mixer.music.load(str(path1))
+            mixer.music.set_volume(1)
+            mixer.music.play()
+        elif datetime.now() >= final_music_date:
+            ok_music = False
+        pixels = sense.get_pixels()
+        if original_pixels[8 * vector_x + vector_y] == gold:
+            if flowers_red == 38:
+                mixer.music.stop()
+                path2 = dir_path/'c.mp3'
+                mixer.music.load(str(path2))
+                mixer.music.set_volume(1)
+                mixer.music.play()
+                touched_pressure_plate = True
+                animation_win_level_1()
+                continue
+            elif flower_blue == True:
+                mixer.music.stop()
+                path2 = dir_path/'d.mp3'
+                mixer.music.load(str(path2))
+                mixer.music.set_volume(1)
+                mixer.music.play()
+                animation_lose_level_1()
+                break
+        event = sense.stick.wait_for_event(emptybuffer=True)
+        if event.action == "pressed":
+            if event.direction == "up" and vector_x > 0:
+                if pixels[8 * (vector_x - 1) + vector_y] == dimgrey:
+                    continue
+                else:
+                    if original_pixels[8 * vector_x + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, gold)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 1:
+                        color_matrix[vector_x][vector_y] += 1
+                        flowers_red += 1
+                        sense.set_pixel(vector_y, vector_x, red)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 2:
+                        color_matrix[vector_x][vector_y] += 1
+                        flower_blue = True
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 3:
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    else:
+                        sense.set_pixel(vector_y, vector_x, white)
+                        vector_x -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+            elif event.direction == "right" and vector_y < 7:
+                if pixels[8 * vector_x + vector_y + 1] == dimgrey:
+                    continue
+                else:
+                    if original_pixels[8 * vector_x + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, gold)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 1:
+                        color_matrix[vector_x][vector_y] += 1
+                        flowers_red += 1
+                        sense.set_pixel(vector_y, vector_x, red)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 2:
+                        color_matrix[vector_x][vector_y] += 1
+                        flower_blue = True
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 3:
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    else:
+                        sense.set_pixel(vector_y, vector_x, white)
+                        vector_y += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+            elif event.direction == "down" and vector_x < 7:
+                if pixels[8 * (vector_x + 1) + vector_y] == dimgrey:
+                    continue
+                else:
+                    if original_pixels[8 * vector_x + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, gold)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 1:
+                        color_matrix[vector_x][vector_y] += 1
+                        flowers_red += 1
+                        sense.set_pixel(vector_y, vector_x, red)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 2:
+                        color_matrix[vector_x][vector_y] += 1
+                        flower_blue = True
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 3:
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    else:
+                        sense.set_pixel(vector_y, vector_x, white)
+                        vector_x += 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+            elif event.direction == "left" and vector_y > 0:
+                if pixels[8 * vector_x + vector_y - 1] == dimgrey:
+                    continue
+                else:
+                    if original_pixels[8 * vector_x + vector_y] == gold:
+                        sense.set_pixel(vector_y, vector_x, gold)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 1:
+                        color_matrix[vector_x][vector_y] += 1
+                        flowers_red += 1
+                        sense.set_pixel(vector_y, vector_x, red)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 2:
+                        color_matrix[vector_x][vector_y] += 1
+                        flower_blue = True
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    elif color_matrix[vector_x][vector_y] == 3:
+                        sense.set_pixel(vector_y, vector_x, blue)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+                    else:
+                        sense.set_pixel(vector_y, vector_x, white)
+                        vector_y -= 1
+                        sense.set_pixel(vector_y, vector_x, pink)
+    if touched_pressure_plate == True:
+        is_playable[2] = 1
+    afisare_imagine_de_sfarsit_de_nivel_1()
+    afisare_imagine_de_sfarsit_de_nivel_2()
+    ENTERING_MAIN_MENU()    
+
 
 def Level3():
     Controls_Level_3()
@@ -587,9 +771,12 @@ def Level3():
     has_flag = False
     out_of_board = False
     ok_theme_song = False
-    moves_made = 0
-    print(color("\nWow! You made it to the castle! Well, you have a maximum of 15 movements and you need to take the red key to Medios's hallway. Make careful steps if you want to stay alive. Don't fall off the map and don't touch the lasers! Good luck!\n", fore=green))
-    while has_flag == False and moves_made <= 15:
+    moves_made = 15
+    #ENGLEZA (ENGLISH)
+    #print(color("\nWow! You made it to the castle! Well, you have a maximum of 15 movements and you need to take the red key to Medios's hallway. Make careful steps if you want to stay alive. Don't fall off the map and don't touch the lasers! Good luck!\n", fore=green))
+    #ROMANA (ROMANIAN)
+    print(color("\nWow! Ai ajuns la castel! Ai la dispozitie maximum 15 miscari, iar tu trebuie sa iei cheia rosie care duce spre holul castelului. Fa pasi cu multa grija daca vrei sa ramai in viata. Nu cadea de pe harta si nu atinge laserele! Multa bafta!\n", fore=green))
+    while has_flag == False and moves_made > 0:
         if ok_theme_song == False:
             ok_theme_song = True
             initial_date_theme_song = datetime.now()
@@ -603,7 +790,11 @@ def Level3():
         pixels = sense.get_pixels()
         event = sense.stick.wait_for_event(emptybuffer=True)
         if event.action == "pressed" and event.direction != "middle":
-            moves_made += 1
+            moves_made -= 1
+            #ENGLEZA (ENGLISH)
+            #print(color("You have " + str(moves_made) + " moves left!", fore=cyan))
+            #ROMANA (ROMANIAN)
+            print(color("Mai ai " + str(moves_made) + " miscari ramase!", fore=cyan))
             if event.direction == "up":
                 if vector_x == 0:
                     sense.set_pixel(vector_y, vector_x, dimgrey)
@@ -868,7 +1059,7 @@ def Level3():
                     mixer.music.play()
                     animation_lose_level_1()
                     break
-    if moves_made > 15:
+    if moves_made < 0:
         mixer.music.stop()
         path2 = dir_path/'d.mp3'
         mixer.music.load(str(path2))
@@ -876,10 +1067,11 @@ def Level3():
         mixer.music.play()
         animation_lose_level_1()
     if has_flag == True:
-        is_playable[2] = 1
+        is_playable[3] = 1
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
+
 
 def Level4():
     Controls_Level_4()
@@ -984,7 +1176,10 @@ def Level4():
         dimgrey, red, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey, dimgrey
     ]
     images = [intro_level4_1, intro_level4_2, intro_level4_3, intro_level4_4, intro_level4_5, intro_level4_6, intro_level4_7, intro_level4_8, intro_level4_9, intro_level4_10]
-    print(color("\nImpressive! You made it to Medios's hallway! It looks like Medios is quite a smart villain and in every room that we need to go through to get to his room he has put several landmines. Watch out for them and try to find a safe way to the doors and get the golden key, in order to fight all mighty Medios.\n", fore=green))
+    #ENGLEZA (ENGLISH)
+    #print(color("\nImpressive! You made it to Medios's hallway! It looks like Medios is quite a smart villain and in every room that we need to go through to get to his room he has put several landmines. Watch out for them and try to find a safe way to the doors and get the golden key, in order to fight all mighty Medios.\n", fore=green))
+    #ROMANA (ROMANIAN)
+    print(color("\nImpresionant! Ai ajuns in holul castelului! Se pare ca Medios este de fapt un raufacator destul de inteligent si in fiecare camera in care trebuie sa intram, acesta a amplasat cateva mine. Ai grija la ele si incearca sa gasesti o cale sigura catre usi si ia cheia aurie, pentru a te bate ulterior cu Medios.\n", fore=green))
     ok_music = False
     vector_x = 4
     has_golden_key = False
@@ -1147,14 +1342,16 @@ def Level4():
                         vector_y -= 1
                         sense.set_pixel(vector_y, vector_x, pink)
     if has_golden_key == True:
-        is_playable[3] = 1
+        is_playable[4] = 1
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
+
+    
+
 #Pentru a te putea folosi de SenseHat-ul fizic, comenteaza toate liniile de mai jos (If you want to use the physical SenseHat, comment all the lines below)
 import threading
 
-#th = threading.Thread(target=MAIN_MENU)
 th = threading.Thread(target=MAIN_MENU)
 th.start()
 sense.loop()

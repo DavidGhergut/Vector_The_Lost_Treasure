@@ -24,6 +24,8 @@ water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 5 (FUNCTION FOR CONTROLS AT LEVEL 5)
+#ENGLEZA(ENGLISH)
+"""
 def Controls_Level_5():
     print("\n")
     print(color("CONTROLS LEVEL 5:", fore=purple))
@@ -32,4 +34,15 @@ def Controls_Level_5():
     print(color("Blue -> Fired bullet", fore=blue))
     print(color("White -> Non picked-up bullet", fore=white))
     print(color("Red -> Life of the boss", fore=red))
+    print("\n")
+"""
+#ROMANA (ROMANIAN)
+def Controls_Level_5():
+    print("\n")
+    print(color("CONTROALE NIVEL 5:", fore=purple))
+    print(color("Roz -> Vector", fore=pink))
+    print(color("Verde -> Medios (Boss)", fore=green))
+    print(color("Albastru -> Glont tras", fore=blue))
+    print(color("Alb -> Glont neluat", fore=white))
+    print(color("Rosu -> Viata boss-ului", fore=red))
     print("\n")

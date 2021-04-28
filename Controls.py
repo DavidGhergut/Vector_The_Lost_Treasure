@@ -1,5 +1,6 @@
 from ENTERING_MAIN_MENU import ENTERING_MAIN_MENU
 from colr import color
+
 #CULORI pentru SenseHat (COLOURS for the SenseHat):
 black = [0, 0, 0]
 cyan = [0, 255, 255]
@@ -22,8 +23,10 @@ magenta = [255, 0, 255]
 brown2 = [210, 105, 30]
 water = [24, 160, 232]
 dimgrey = [104, 104, 104]
-#FUNCTIE DE AFISARE A CONTROALELOR (FUNCTION FOR CONTROLS)
 
+#FUNCTIE DE AFISARE A CONTROALELOR (FUNCTION FOR CONTROLS)
+#ENGLEZA (ENGLISH)
+"""
 def Controls():
     print("\n")
     print(color("CONTROLS MAIN MENU:", fore=green))
@@ -35,5 +38,20 @@ def Controls():
     print(color("Grey -> Level 3", fore=dimgrey))
     print(color("Gold & orange -> Level 4", fore=orange, back=gold))
     print(color("Red -> Level 5 (Boss fight)", fore=red))
+    print("\n")
+    ENTERING_MAIN_MENU()
+"""
+#ROMANA (ROMANIAN)
+def Controls():
+    print("\n")
+    print(color("CONTROALE MAIN MENU:", fore=green))
+    print(color("Albastru -> Vector (you)", fore=blue))
+    print(color("Maro -> usi spre iesire", fore=brown))
+    print(color("Mov -> Storyline", fore=purple))
+    print(color("Maro inchis & Portocaliu -> Level 1", fore=orange, back=darkbrown))
+    print(color("Cyan -> Level 2", fore=cyan))
+    print(color("Gri -> Level 3", fore=dimgrey))
+    print(color("Galben & portocaliu -> Level 4", fore=orange, back=gold))
+    print(color("Rosu -> Level 5 (Boss fight)", fore=red))
     print("\n")
     ENTERING_MAIN_MENU()

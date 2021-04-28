@@ -69,7 +69,10 @@ def Level5():
     easter_controls = []
     easter_solution = ["up", "up", "down", "left", "left", "right", "up", "down", "down", "right", "left", "up", "down"]
     initial_date, initial_date_boss_bullet = datetime.now(), datetime.now()
-    print(color("You have " + str(vector_life_hearts) + " hearts. Pick up bullets and shoot Medios in order to win. Be careful and watch out for the fire balls! You got this!", fore=green))
+    #ENGLEZA (ENGLISH)
+    #print(color("You have " + str(vector_life_hearts) + " hearts. Pick up bullets and shoot Medios in order to win. Be careful and watch out for the fire balls! You got this!", fore=green))
+    #ROMANA (ROMANIAN)
+    print(color("Ai " + str(vector_life_hearts) + " vieti. Ia gloantele de pe jos si impusca-l pe Medios pentru a castiga. Ai grija si feresete-te de mingiile de foc! Poti sa o faci!", fore=green))
     while (boss_life_hearts < 8):
         if ok_music == False:
             ok_music = True
@@ -99,7 +102,10 @@ def Level5():
                         ok_easter = False
                         break
                 if ok_easter == True:
-                    print(color("Awesome! You have found the easter egg! You win automatically! Less goo!", fore=gold))
+                    #ENGLEZA (ENGLISH)
+                    #print(color("Awesome! You have found the easter egg! You win automatically! Less goo!", fore=gold))
+                    #ROMANA (ROMANIAN)
+                    print(color("Minunat! Ai gasit \"easter egg-ul\"! Ai castigat automat! Less goo!", fore=gold))
                     mixer.music.stop()
                     path2 = dir_path/'letsgoo.mp3'
                     mixer.music.load(str(path2))
@@ -128,7 +134,10 @@ def Level5():
                 if boss_life_hearts < 4:
                     sense.set_pixel(boss_y, boss_x, toxicgreen)
                 elif boss_life_hearts == 4 and ok_angry == False:
-                    print(color("\nMEDIOS IS ANGRY!\n", fore=purple))
+                    #ENGLEZA (ENGLISH)
+                    #print(color("\nMEDIOS IS ANGRY!\n", fore=purple))
+                    #ROMANA (ROMANIAN)
+                    print(color("\nMEDIOS ESTE NERVOS!\n", fore=purple))
                     mixer.music.stop()
                     path2 = dir_path/'MONSTER_SCREAM.mp3'
                     mixer.music.load(str(path2))
@@ -165,7 +174,10 @@ def Level5():
                             boss_bullets_fired.pop(fired_bullet)
                             vector_is_hit(vector_x, vector_y)
                             vector_life_hearts -= 1
-                            print(color("\n\nYOU HAVE " + str(vector_life_hearts) + " LIVES LEFT!\n", fore=green))
+                            #ENGLEZA (ENGLISH)
+                            #print(color("\n\nYOU HAVE " + str(vector_life_hearts) + " LIVES LEFT!\n", fore=green))
+                            #ROMANA (ROMANIAN)
+                            print(color("\n\nMAI AI " + str(vector_life_hearts) + " VIETI RAMASE!\n", fore=green))
                         else:
                             boss_bullets_fired[fired_bullet][0] += 1
                     for fired_bullet in boss_bullets_fired.values():
@@ -206,9 +218,15 @@ def Level5():
                     new_fired_bullet = [vector_x - 1, vector_y]
                     sense.set_pixel(new_fired_bullet[1], new_fired_bullet[0], blue)
                     bullets_fired["bullet " + str(vector_x - 1) + " and " + str(vector_y)] = new_fired_bullet
-                    print(color("\nYou have " + str(nr_bullets) + " bullet left!\n", fore=green))
+                    #ENGLEZA (ENGLISH)
+                    #print(color("\nYou have " + str(nr_bullets) + " bullet left!\n", fore=green))
+                    #ROMANA (ROMANIAN)
+                    print(color("\nMai ai " + str(nr_bullets) + " gloante ramase!\n", fore=green))
                 else:
-                    print(color("\nYOU DON'T HAVE ENOUGH BULLETS TO SHOOT!\n", fore=red))
+                    #ENGLEZA (ENGLISH)
+                    #print(color("\nYOU DON'T HAVE ENOUGH BULLETS TO SHOOT!\n", fore=red))
+                    #ROMANA (ROMANIAN)
+                    print(color("\nNU AI DESTULE GLOANTE CA SA TRAGI!\n", fore=red))
             sense.set_pixel(vector_y, vector_x, pink)
             if not((event.direction == "left" and vector_y == 0) or (event.direction == "up" and vector_x == 5) or (event.direction == "right" and vector_y == 7) or (event.direction == "down" and vector_x == 7) or (event.direction == "middle" and nr_bullets == 0)):
                 for fired_bullet in list(boss_bullets_fired):
@@ -217,8 +235,11 @@ def Level5():
                         boss_bullets_fired.pop(fired_bullet)
                         vector_is_hit(vector_x, vector_y)
                         vector_life_hearts -= 1
-                        print(color("\n\nYOU HAVE " + str(vector_life_hearts) + " LIVES LEFT!\n", fore=green))
-            final_date_new_bullet = initial_date + timedelta(seconds = 5)
+                        #ENGLEZA (ENGLISH)
+                        #print(color("\n\nYOU HAVE " + str(vector_life_hearts) + " LIVES LEFT!\n", fore=green))
+                        #ROMANA (ROMANIAN)
+                        print(color("\n\nMAI AI " + str(vector_life_hearts) + " VIETI RAMASE!\n", fore=green))
+            final_date_new_bullet = initial_date + timedelta(seconds = 7)
             if datetime.now() >= final_date_new_bullet:
                 point_x = random.randint(5, 7)
                 point_y = random.randint(0, 7)
@@ -227,9 +248,9 @@ def Level5():
                 points["point " + str(point_x) + " and " + str(point_y)] = new_point
                 initial_date = datetime.now()
             if boss_life_hearts < 4:
-                final_date_boss_bullet = initial_date_boss_bullet + timedelta(seconds = 10)
+                final_date_boss_bullet = initial_date_boss_bullet + timedelta(seconds = 4)
             else:
-                final_date_boss_bullet = initial_date_boss_bullet + timedelta(seconds = 5)
+                final_date_boss_bullet = initial_date_boss_bullet + timedelta(seconds = 1)
             if datetime.now() >= final_date_boss_bullet:
                 boss_bullet_x = 3
                 boss_bullet_y = boss_y
@@ -238,7 +259,6 @@ def Level5():
                 boss_bullets_fired["fired " + str(boss_bullet_x) + " and " + str(boss_bullet_y)] = new_boss_bullet
                 initial_date_boss_bullet = datetime.now()
     if vector_life_hearts != 0 and ok_easter == False:
-        
         mixer.music.stop()
         path2 = dir_path/'victory_boss.mp3'
         mixer.music.load(str(path2))
@@ -248,5 +268,3 @@ def Level5():
     afisare_imagine_de_sfarsit_de_nivel_1()
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
-
-#Level5()

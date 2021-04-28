@@ -24,6 +24,8 @@ water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 4 (FUNCTION FOR CONTROLS AT LEVEL 4)
+#ENGLEZA (ENGLISH)
+"""
 def Controls_Level_4():
     print("\n")
     print(color("CONTROLS LEVEL 4:", fore=green))
@@ -32,4 +34,15 @@ def Controls_Level_4():
     print(color("Red -> Landmines", fore=red))
     print(color("Purple -> Doors to the next room", fore=purple))
     print(color("Gold -> Key", fore=gold))
+    print("\n")
+"""
+#ROMANA (ROMANIAN)
+def Controls_Level_4():
+    print("\n")
+    print(color("CONTROALE NIVEL 4:", fore=green))
+    print(color("Roz -> Vector", fore=pink))
+    print(color("Gri -> Podea", fore=dimgrey))
+    print(color("Rosu -> Mine", fore=red))
+    print(color("Mov -> Usa catre camera urmatoare", fore=purple))
+    print(color("Galben -> Cheie", fore=gold))
     print("\n")

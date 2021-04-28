@@ -24,12 +24,25 @@ water = [24, 160, 232]
 dimgrey = [104, 104, 104]
 
 #FUNCTIE DE AFISARE A CONTROALELOR PENTRU NIVELUL 3 (FUNCTION FOR CONTROLS AT LEVEL 3)
+#ENGLEZA (ENGLISH)
+"""
 def Controls_Level_3():
     print("\n")
     print(color("CONTROLS LEVEL 3:", fore=green))
     print(color("Pink -> Vector", fore=pink))
     print(color("Red -> Key to the hallway", fore=red))
     print(color("Cyan -> Ice", fore=cyan))
-    print(color("Grey -> Pavement", fore=dimgrey))
+    print(color("Grey -> Floor", fore=dimgrey))
     print(color("Purple -> Lasers", fore=purple))
+    print("\n")
+"""
+#ROMANA (ROMANIAN)
+def Controls_Level_3():
+    print("\n")
+    print(color("CONTROALE NIVEL 3:", fore=green))
+    print(color("Roz -> Vector", fore=pink))
+    print(color("Rosu -> Cheie catre hol", fore=red))
+    print(color("Cyan -> Gheata", fore=cyan))
+    print(color("Gri -> Podea", fore=dimgrey))
+    print(color("Mov -> Laser", fore=purple))
     print("\n")
