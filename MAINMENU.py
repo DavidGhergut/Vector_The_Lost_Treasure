@@ -614,7 +614,15 @@ def Level2():
             ok_music = False
         pixels = sense.get_pixels()
         if original_pixels[8 * vector_x + vector_y] == gold:
-            if flowers_red == 38:
+            if flower_blue == True:
+                mixer.music.stop()
+                path2 = dir_path/'d.mp3'
+                mixer.music.load(str(path2))
+                mixer.music.set_volume(1)
+                mixer.music.play()
+                animation_lose_level_1()
+                break
+            elif flowers_red == 38:
                 mixer.music.stop()
                 path2 = dir_path/'c.mp3'
                 mixer.music.load(str(path2))
@@ -623,14 +631,6 @@ def Level2():
                 touched_pressure_plate = True
                 animation_win_level_1()
                 continue
-            elif flower_blue == True:
-                mixer.music.stop()
-                path2 = dir_path/'d.mp3'
-                mixer.music.load(str(path2))
-                mixer.music.set_volume(1)
-                mixer.music.play()
-                animation_lose_level_1()
-                break
         event = sense.stick.wait_for_event(emptybuffer=True)
         if event.action == "pressed":
             if event.direction == "up" and vector_x > 0:
