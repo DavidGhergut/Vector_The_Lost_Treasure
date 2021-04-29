@@ -65,7 +65,19 @@ Select -> ```Space```
 
 Move around -> ```Keyboard arrows (Up, Down, Left, Right)```
 
-We also recommend using headphones or speakers for audio output!
+We suggest you playing the game like this:
+
+![Playing suggestion](https://github.com/DavidGhergut/Vector_The_Lost_Treasure/blob/master/Playing_suggestion.png)
+
+So that it is easier to follow the instructions and indications on the Powershell / Terminal.
+
+Beware that by default, the game is in Romanian, but if you want to use the English version, go through each file and you will see blocks of code like this:
+
+![Romanian to English conversion](https://github.com/DavidGhergut/Vector_The_Lost_Treasure/blob/master/Romanian_To_English_Conversion.png)
+
+Uncomment the English part and comment the Romanian part for a more general experience!
+
+### Very important!! We also recommend using headphones or speakers for an even more enhanced experience!
 
 ### P.S. If you want to use a physical SenseHat, please comment the following lines of code from ```MAINMENU.py``` and delete the ```sense_hat.py``` file!!
 
