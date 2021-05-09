@@ -33,6 +33,8 @@ from Level5 import Level5
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
 is_playable = [0, 0, 0, 0, 0]
+dir_path = Path(__file__).parent.resolve()
+mixer.init()
 
 #CULORI pentru SenseHat (COLOURS for the SenseHat):
 black = [0, 0, 0]
@@ -92,7 +94,7 @@ reset = [
     black, black, black, coral, coral, black, black, black,
 ]
 
-dir_path = Path(__file__).parent.resolve()
+
 def MAIN_MENU():
     sense.show_message("Welcome", text_colour = blue, scroll_speed = 0.05)
     sense.show_message("to", text_colour = gold, scroll_speed = 0.05)
@@ -114,7 +116,6 @@ def MAIN_MENU():
         print(color("Go to the coral section for instructions!", fore=coral))
         print("\n\n")
         #INITIALIZAM FISIERUL MP3 PENTRU A FI RULAT
-        mixer.init()
         ok3 = False
         while ok1 == False:
             if ok3 == False:
@@ -1348,7 +1349,6 @@ def Level4():
     ENTERING_MAIN_MENU()
 
     
-
 #Pentru a te putea folosi de SenseHat-ul fizic, comenteaza toate liniile de mai jos (If you want to use the physical SenseHat, comment all the lines below)
 import threading
 
@@ -1356,3 +1356,5 @@ th = threading.Thread(target=MAIN_MENU)
 th.start()
 sense.loop()
 th.join()
+
+MAIN_MENU()
