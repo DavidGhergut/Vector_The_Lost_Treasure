@@ -78,10 +78,16 @@ def Level5():
             ok_music = True
             initial_music_date = datetime.now()
             final_music_date = initial_music_date + timedelta(seconds=293)
-            path1 = dir_path/'melodie_boss.mp3'
-            mixer.music.load(str(path1))
-            mixer.music.set_volume(3)
-            mixer.music.play()
+            if ok_angry == False:
+                path1 = dir_path/'melodie_boss.mp3'
+                mixer.music.load(str(path1))
+                mixer.music.set_volume(3)
+                mixer.music.play()
+            elif ok_angry == True:
+                path1 = dir_path/'melodie_boss_v2.mp3'
+                mixer.music.load(str(path1))
+                mixer.music.set_volume(3)
+                mixer.music.play()
         elif datetime.now() >= final_music_date:
             ok_music = False
         if (vector_life_hearts == 0):

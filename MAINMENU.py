@@ -32,7 +32,7 @@ from Level5 import Level5
 
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
-is_playable = [0, 0, 0, 0, 0]
+is_playable = [0, 0, 0, 1, 1]
 dir_path = Path(__file__).parent.resolve()
 mixer.init()
 
@@ -1194,7 +1194,7 @@ def Level4():
                 ok_music = True
                 initial_music_date = datetime.now()
                 final_music_date = initial_music_date + timedelta(seconds=21)
-                path1 = dir_path/'melodie_level4.mp3'
+                path1 = dir_path/'lvl_4.mp3'
                 mixer.music.load(str(path1))
                 mixer.music.set_volume(1)
                 mixer.music.play()
@@ -1356,5 +1356,3 @@ th = threading.Thread(target=MAIN_MENU)
 th.start()
 sense.loop()
 th.join()
-
-MAIN_MENU()
