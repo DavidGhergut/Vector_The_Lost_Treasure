@@ -32,7 +32,7 @@ from Level5 import Level5
 
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
-is_playable = [0, 0, 0, 1, 1]
+is_playable = [0, 0, 0, 0, 0]
 dir_path = Path(__file__).parent.resolve()
 mixer.init()
 
