@@ -74,7 +74,7 @@ entering_image_1 = [
 
 entering_image_2 = [
     black, black, black, brown, brown, black, black, black,
-    black, black, brown, blue, blue, brown, black, black,
+    black, black, brown, pink, pink, brown, black, black,
     dimgrey, dimgrey, black, black, black, black, purple, purple,
     black, black, black, black, black, black, black, black,
     gold, orange, black, black, black, black, darkbrown, orange,
@@ -274,8 +274,8 @@ def MAIN_MENU():
                 elif event2.direction == "right" and pixel1_y < 7 and pixel2_y < 7:
                     pixel1_y = pixel1_y + 1
                     pixel2_y = pixel2_y + 1
-                sense.set_pixel(pixel1_y, pixel1_x, blue)
-                sense.set_pixel(pixel2_y, pixel2_x, blue)
+                sense.set_pixel(pixel1_y, pixel1_x, pink)
+                sense.set_pixel(pixel2_y, pixel2_x, pink)
 
     #La finalul programului, dezactivam toate led-urile aprinse de pe SenseHat (At the end of the program, we clear the SenseHat)
     sense.clear()
@@ -1193,7 +1193,7 @@ def Level4():
             if ok_music == False:
                 ok_music = True
                 initial_music_date = datetime.now()
-                final_music_date = initial_music_date + timedelta(seconds=21)
+                final_music_date = initial_music_date + timedelta(seconds=27)
                 path1 = dir_path/'lvl_4.mp3'
                 mixer.music.load(str(path1))
                 mixer.music.set_volume(1)

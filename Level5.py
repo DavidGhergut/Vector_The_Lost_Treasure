@@ -65,7 +65,17 @@ def Level5():
     points = {}
     bullets_fired = {}
     boss_bullets_fired = {}
-    #EASTER EGG :D
+
+
+
+
+
+    #EASTER EGG (TOP SECRET) :D
+
+
+
+
+    
     easter_controls = []
     easter_solution = ["up", "up", "down", "left", "left", "right", "up", "down", "down", "right", "left", "up", "down"]
     initial_date, initial_date_boss_bullet = datetime.now(), datetime.now()

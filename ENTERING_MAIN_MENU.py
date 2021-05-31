@@ -39,7 +39,7 @@ entering_image_1 = [
 
 entering_image_2 = [
     black, black, black, brown, brown, black, black, black,
-    black, black, brown, blue, blue, brown, black, black,
+    black, black, brown, pink, pink, brown, black, black,
     dimgrey, dimgrey, black, black, black, black, purple, purple,
     black, black, black, black, black, black, black, black,
     gold, orange, black, black, black, black, darkbrown, orange,
@@ -51,7 +51,7 @@ entering_image_2 = [
 entering_image_3 = [
     black, black, black, brown, brown, black, black, black,
     black, black, black, black, black, black, black, black,
-    dimgrey, dimgrey, black, blue, blue, black, purple, purple,
+    dimgrey, dimgrey, black, pink, pink, black, purple, purple,
     black, black, black, black, black, black, black, black,
     gold, orange, black, black, black, black, darkbrown, orange,
     black, black, black, black, black, black, black, black,
