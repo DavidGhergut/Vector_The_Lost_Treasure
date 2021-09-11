@@ -35,7 +35,7 @@ Open the Powershell application (Windows) or Terminal and type these commands:
 pip3 install colr
 pip3 install pygame
 ```
-## ⚠️ For M1 Macs, pygame currently does not have all the features fixed, thus in order for pygame to work properly, you need run the following command in the Terminal ⚠️
+## ⚠️ For M1 Macs, pygame currently does not have all the features fixed, thus in order to make pygame work properly, you need run the following command in the Terminal ⚠️
 
 ```
 pip install git+https://github.com/Muxelmann/pygame.git@patch-1
