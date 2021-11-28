@@ -45,7 +45,8 @@ class SenseHatEmu:
 		while self.active:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					self.active = False
+					pygame.quit()
+					#self.active = False
 				if event.type == pygame.KEYUP or event.type == pygame.KEYDOWN:
 					se_event = StickEvent()
 					
@@ -165,7 +166,7 @@ sense_emu = SenseHatEmu()
 
 class Stick:
 	def __init__(self):
-		pass;
+		pass
 
 	def wait_for_event(self, emptybuffer=False):
 		sense_emu.init()

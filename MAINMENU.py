@@ -9,6 +9,7 @@ Mihai Pangratie
 from sense_hat import SenseHat
 from time import sleep
 import collections
+import pygame
 from pygame import mixer, mixer_music
 from colr import color
 from animation_lose_level_1 import animation_lose_level_1
@@ -29,6 +30,11 @@ from storyline_level_3 import storyline_level_3
 from storyline_level_4_and_5 import storyline_level_4_and_5
 from pathlib import Path 
 from Level5 import Level5
+
+#TITLU SI ICONITA (TITLE AND ICON)
+pygame.display.set_caption("Vector. The Lost Treasure")
+icon = pygame.image.load('logo.jpg')
+pygame.display.set_icon(icon)
 
 #VARIABILE GLOBALE (GLOBAL VARIABLES):
 sense = SenseHat()
@@ -143,7 +149,8 @@ def MAIN_MENU():
                         sense.show_message("playing", text_colour = purple, scroll_speed = 0.05)
                         sense.show_message("Vector.", text_colour = green, scroll_speed = 0.05)
                         sense.show_message("The Lost Treasure!", text_colour = gold, scroll_speed = 0.05)
-                        return
+                        
+                        #return
                     elif event3.action == "pressed" and event3.direction == "down":
                         sense.show_message("Choose the level you want to play!", text_colour = coral, scroll_speed = 0.05)
                         ENTERING_MAIN_MENU()
