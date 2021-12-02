@@ -1355,11 +1355,4 @@ def Level4():
     afisare_imagine_de_sfarsit_de_nivel_2()
     ENTERING_MAIN_MENU()
 
-    
-#Pentru a te putea folosi de SenseHat-ul fizic, comenteaza toate liniile de mai jos (If you want to use the physical SenseHat, comment all the lines below)
-import threading
-
-th = threading.Thread(target=MAIN_MENU)
-th.start()
-sense.loop()
-th.join()
+MAIN_MENU()
