@@ -29,11 +29,10 @@ git clone https://github.com/DavidGhergut/Vector_The_Lost_Treasure
 
 ## 3. Install the essential modules
 
-Open the Powershell application (Windows) or Terminal and type these commands:
+Open the Powershell application (Windows) or Terminal and type this command:
 
 ```
-pip3 install colr
-pip3 install pygame
+pip install -r requirements.txt
 ```
 ## ⚠️ For M1 Macs, pygame currently does not have all the features fixed, thus in order to make pygame work properly, you need run the following command in the Terminal ⚠️
 
@@ -85,8 +84,10 @@ Uncomment the English part and comment the Romanian part for a more general expe
 
 ### Very important!! We also recommend using headphones or speakers for an even more enhanced experience!
 
-### P.S. If you want to use a physical SenseHat, please comment the following lines of code from ```MAINMENU.py``` and delete the ```sense_hat.py``` file!!
+### P.S. If you want to use a physical SenseHat, please enter the following command on the Powershell / Terminal!!
 
-![Commenting lines for playing on the physical SenseHat](https://github.com/DavidGhergut/Vector_The_Lost_Treasure/blob/master/For_physical_SenseHat.png)
+```
+git apply sensehat.diff
+```
 
 # This is it! You are done installing *Vector. The Lost Treasure.* Thank you so much and happy gaming! 💪
